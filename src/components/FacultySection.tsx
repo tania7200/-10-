@@ -52,10 +52,10 @@ export const FacultySection: React.FC<FacultySectionProps> = ({ faculty, theme }
                   <img
                     src={director.image}
                     alt={director.name}
-                    className="w-full h-full object-cover object-top transition-transform duration-500 group-hover:scale-105 filter brightness-95"
+                    className="w-full h-full object-cover object-top transition-transform duration-500 group-hover:scale-105"
                   />
                 </div>
-                <div className="absolute inset-0 bg-gradient-to-t from-[#0e0e16] via-transparent to-transparent opacity-80" />
+                <div className="absolute inset-0 bg-gradient-to-t from-[#0e0e16]/90 via-transparent to-transparent" />
                 
                 <div className="absolute bottom-5 left-5 right-5 text-left">
                   <span 

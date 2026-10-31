@@ -76,7 +76,7 @@ export const IndividualSystemSection: React.FC<IndividualSystemProps> = ({
           </div>
           <h2 className="text-2xl sm:text-4xl font-extrabold text-white tracking-tight mb-4">
             왜 대치동 학부모들은 <br className="hidden sm:inline" />
-            <span style={{ color: theme.primaryColor }}>'그레이드원 1:1 개별맞춤'</span>을 신뢰하는가?
+            <span style={{ color: theme.primaryColor }}>'그레이드원 대치10관 수학학원'</span>을 신뢰하는가?
           </h2>
           <p className="text-zinc-400 text-sm sm:text-base leading-relaxed">
             100명이 앉아있는 대형 강의로는 결코 채울 수 없는 취약점을 집요하게 파고듭니다.

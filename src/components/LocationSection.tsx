@@ -60,9 +60,14 @@ export const LocationSection: React.FC<LocationSectionProps> = ({
             </div>
 
             {/* Dark Styled Map Canvas */}
-            <div className="relative w-full h-[360px] sm:h-[420px] bg-[#14141e] rounded-2xl overflow-hidden border border-[#242436]">
+            <div className="relative w-full h-[320px] sm:h-[420px] bg-[#14141e] rounded-2xl overflow-hidden border border-[#242436]">
               {/* Grid Roads */}
-              <svg className="w-full h-full" viewBox="0 0 800 450" preserveAspectRatio="xMidYMid meet" xmlns="http://www.w3.org/2000/svg">
+              <svg 
+                className="w-full h-full" 
+                viewBox="0 0 800 450" 
+                preserveAspectRatio="xMidYMid slice" 
+                xmlns="http://www.w3.org/2000/svg"
+              >
                 {/* Major Roads */}
                 {/* Dogok-ro (Horizontal main avenue) */}
                 <path d="M 0 200 L 800 200" stroke="#2c2c40" strokeWidth="40" strokeLinecap="round" />
@@ -75,33 +80,33 @@ export const LocationSection: React.FC<LocationSectionProps> = ({
                 <path d="M 640 0 L 620 450" stroke="#252535" strokeWidth="32" strokeLinecap="round" />
 
                 {/* Road Labels */}
-                <text x="400" y="175" fill="#a1a1aa" fontSize="14" fontWeight="bold" textAnchor="middle">도곡로 (Dogok-ro)</text>
+                <text x="400" y="175" fill="#a1a1aa" fontSize="16" fontWeight="bold" textAnchor="middle">도곡로 (Dogok-ro)</text>
 
                 {/* Landmark: Gangnam Severance Hospital */}
                 <g transform="translate(30, 60)">
-                  <rect width="110" height="70" rx="8" fill="#1e293b" stroke="#334155" strokeWidth="1" />
-                  <text x="55" y="32" fill="#94a3b8" fontSize="12" fontWeight="bold" textAnchor="middle">강남세브란스</text>
-                  <text x="55" y="48" fill="#64748b" fontSize="10" textAnchor="middle">병원</text>
+                  <rect width="120" height="80" rx="8" fill="#1e293b" stroke="#334155" strokeWidth="1" />
+                  <text x="60" y="38" fill="#94a3b8" fontSize="14" fontWeight="bold" textAnchor="middle">강남세브란스</text>
+                  <text x="60" y="58" fill="#64748b" fontSize="12" textAnchor="middle">병원</text>
                 </g>
 
                 {/* Landmark: Dogok 1-dong Community Center */}
-                <g transform="translate(240, 260)">
-                  <rect width="120" height="60" rx="8" fill="#18181b" stroke="#27272a" strokeWidth="1" />
-                  <text x="60" y="28" fill="#a1a1aa" fontSize="11" fontWeight="bold" textAnchor="middle">도곡1동</text>
-                  <text x="60" y="44" fill="#71717a" fontSize="10" textAnchor="middle">주민센터</text>
+                <g transform="translate(220, 260)">
+                  <rect width="130" height="70" rx="8" fill="#18181b" stroke="#27272a" strokeWidth="1" />
+                  <text x="65" y="32" fill="#a1a1aa" fontSize="13" fontWeight="bold" textAnchor="middle">도곡1동</text>
+                  <text x="65" y="52" fill="#71717a" fontSize="12" textAnchor="middle">주민센터</text>
                 </g>
 
                 {/* Landmark: Yeoksam Lucky Apartment */}
-                <g transform="translate(420, 40)">
-                  <rect width="100" height="50" rx="8" fill="#18181b" stroke="#27272a" strokeWidth="1" />
-                  <text x="50" y="24" fill="#a1a1aa" fontSize="11" fontWeight="bold" textAnchor="middle">역삼럭키</text>
-                  <text x="50" y="38" fill="#71717a" fontSize="10" textAnchor="middle">아파트</text>
+                <g transform="translate(420, 30)">
+                  <rect width="110" height="60" rx="8" fill="#18181b" stroke="#27272a" strokeWidth="1" />
+                  <text x="55" y="28" fill="#a1a1aa" fontSize="13" fontWeight="bold" textAnchor="middle">역삼럭키</text>
+                  <text x="55" y="46" fill="#71717a" fontSize="12" textAnchor="middle">아파트</text>
                 </g>
 
                 {/* Landmark: Daiso (Side by Side) */}
-                <g transform="translate(360, 140)">
-                  <rect width="75" height="40" rx="6" fill="#450a0a" stroke="#991b1b" strokeWidth="1" />
-                  <text x="37.5" y="24" fill="#fca5a5" fontSize="11" fontWeight="bold" textAnchor="middle">다이소</text>
+                <g transform="translate(350, 135)">
+                  <rect width="85" height="50" rx="6" fill="#450a0a" stroke="#991b1b" strokeWidth="1" />
+                  <text x="42.5" y="32" fill="#fca5a5" fontSize="13" fontWeight="bold" textAnchor="middle">다이소</text>
                 </g>
 
                 {/* TARGET PIN: GRADE ONE DAECHI 10 */}
@@ -113,32 +118,32 @@ export const LocationSection: React.FC<LocationSectionProps> = ({
                 </g>
 
                 {/* Academy Info Label */}
-                <g transform="translate(440, 100)">
-                  <rect x="0" y="0" width="165" height="50" rx="10" fill="#09090b" stroke="#ff6b00" strokeWidth="2" />
-                  <text x="82.5" y="22" fill="#ff6b00" fontSize="12" fontWeight="900" textAnchor="middle">그레이드원 대치10관</text>
-                  <text x="82.5" y="38" fill="#ffffff" fontSize="10" fontWeight="bold" textAnchor="middle">도곡로 184 (4층)</text>
+                <g transform="translate(440, 90)">
+                  <rect x="0" y="0" width="180" height="60" rx="10" fill="#09090b" stroke="#ff6b00" strokeWidth="2" />
+                  <text x="90" y="26" fill="#ff6b00" fontSize="15" fontWeight="900" textAnchor="middle">그레이드원 대치10관</text>
+                  <text x="90" y="46" fill="#ffffff" fontSize="12" fontWeight="bold" textAnchor="middle">도곡로 184 (4층)</text>
                 </g>
 
                 {/* Landmark: Hanti Station */}
-                <g transform="translate(630, 250)">
-                  <rect width="130" height="70" rx="10" fill="#1c1917" stroke="#44403c" strokeWidth="1.5" />
-                  <circle cx="25" cy="35" r="12" fill="#facc15" />
-                  <text x="25" y="39" fill="#000" fontSize="11" fontWeight="900" textAnchor="middle">K</text>
-                  <text x="75" y="32" fill="#fde68a" fontSize="12" fontWeight="bold" textAnchor="middle">한티역</text>
-                  <text x="75" y="48" fill="#a8a29e" fontSize="10" textAnchor="middle">7번출구 도보7분</text>
+                <g transform="translate(630, 240)">
+                  <rect width="140" height="80" rx="10" fill="#1c1917" stroke="#44403c" strokeWidth="1.5" />
+                  <circle cx="25" cy="40" r="12" fill="#facc15" />
+                  <text x="25" y="44" fill="#000" fontSize="11" fontWeight="900" textAnchor="middle">K</text>
+                  <text x="80" y="36" fill="#fde68a" fontSize="14" fontWeight="bold" textAnchor="middle">한티역</text>
+                  <text x="80" y="56" fill="#a8a29e" fontSize="11" textAnchor="middle">7번출구 도보7분</text>
                 </g>
 
                 {/* Landmark: BEK (In front) */}
-                <g transform="translate(340, 240)">
-                  <rect width="80" height="45" rx="8" fill="#1e1b4b" stroke="#4338ca" strokeWidth="1" />
-                  <text x="40" y="26" fill="#e0e7ff" fontSize="11" fontWeight="bold" textAnchor="middle">BEK</text>
+                <g transform="translate(340, 250)">
+                  <rect width="90" height="50" rx="8" fill="#1e1b4b" stroke="#4338ca" strokeWidth="1" />
+                  <text x="45" y="32" fill="#e0e7ff" fontSize="13" fontWeight="bold" textAnchor="middle">BEK</text>
                 </g>
 
                 {/* Landmark: Starbucks (In front) */}
-                <g transform="translate(435, 240)">
-                  <rect width="90" height="45" rx="8" fill="#064e3b" stroke="#059669" strokeWidth="1" />
-                  <text x="45" y="20" fill="#ecfdf5" fontSize="11" fontWeight="bold" textAnchor="middle">스타벅스</text>
-                  <text x="45" y="34" fill="#6ee7b7" fontSize="9" textAnchor="middle">역삼럭키점</text>
+                <g transform="translate(445, 250)">
+                  <rect width="100" height="50" rx="8" fill="#064e3b" stroke="#059669" strokeWidth="1" />
+                  <text x="50" y="24" fill="#ecfdf5" fontSize="13" fontWeight="bold" textAnchor="middle">스타벅스</text>
+                  <text x="50" y="40" fill="#6ee7b7" fontSize="11" textAnchor="middle">역삼럭키점</text>
                 </g>
               </svg>
             </div>

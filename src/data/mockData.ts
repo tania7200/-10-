@@ -20,7 +20,7 @@ export const initialThemeSettings: ThemeSettings = {
   fontFamily: 'pretendard',
   academyName: '그레이드원 대치10관 수학학원',
   subTitle: '초·중·고 내신대비 & 1:1 개별맞춤 & 명문고·국제학교 전문',
-  heroHeadline: '수학의 한계를 넘는 개별 1:1 맞춤 솔루션',
+  heroHeadline: '그레이드원 대치10관 수학학원, 수학의 한계를 넘는 개별 맞춤 솔루션',
   heroSubheadline: '대치동 최상위 1%가 증명한 킬러문항 정복 로드맵과 강남 8학군 내신·특목고·국제학교(IB/AP) 완벽 대비',
   phone: '02-573-3133',
   address: '서울특별시 강남구 도곡로 184 (도곡동 544) 4층',
@@ -317,7 +317,7 @@ export const initialFaculty: FacultyMember[] = [
     ],
     specialty: '1:1 사고과정 역추적 클리닉, 강남 핵심 고교 내신 만점 솔루션',
     quote: '수학은 문제를 푸는 행위가 아니라, 주어진 조건과 필연적으로 대화하는 훈련입니다.',
-    image: '/src/assets/images/director_portrait_slender_modern_navy_1793449073767.jpg',
+    image: '/assets/images/director_korean_young_navy_1793451453083.jpg',
   },
 ];
 

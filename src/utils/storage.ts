@@ -7,10 +7,10 @@ import { Post, PostCategory, ThemeSettings, SeoSettings, ConsultationBooking } f
 import { initialPosts, initialThemeSettings, initialSeoSettings, initialBookings } from '../data/mockData';
 
 const STORAGE_KEYS = {
-  POSTS: 'gradeone_posts_v1',
-  THEME: 'gradeone_theme_v1',
-  SEO: 'gradeone_seo_v1',
-  BOOKINGS: 'gradeone_bookings_v1',
+  POSTS: 'gradeone_posts_v2',
+  THEME: 'gradeone_theme_v2',
+  SEO: 'gradeone_seo_v2',
+  BOOKINGS: 'gradeone_bookings_v2',
 };
 
 export const loadStoredPosts = (): Post[] => {
