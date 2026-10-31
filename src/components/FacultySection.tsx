@@ -32,7 +32,7 @@ export const FacultySection: React.FC<FacultySectionProps> = ({ faculty, theme }
             대치10관 <span style={{ color: theme.primaryColor }}>원장 소개</span>
           </h2>
           <p className="text-zinc-400 text-sm sm:text-base">
-            대치동, 압구정, 반포 최상위권을 12년간 직접 이끌어온 이선규 대표원장이 학생 한 명 한 명을 1:1로 직접 지도합니다.
+            대치동, 압구정, 반포 최상위권을 12년간 직접 이끌어온 이선규 대표원장과 전문 강사진이 학생 한 명 한 명을 1:1로 직접 지도합니다.
           </p>
         </div>
 

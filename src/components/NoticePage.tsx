@@ -27,8 +27,6 @@ import {
   Home,
   BookOpen,
   Filter,
-  Paperclip,
-  Download,
 } from 'lucide-react';
 import { Post, PostCategory, ThemeSettings, TargetTrack } from '../types';
 
@@ -224,57 +222,6 @@ export const NoticePage: React.FC<NoticePageProps> = ({
                   조회수: {currentPost.views}회
                 </span>
               </div>
-
-              {/* Official Attachment File Box */}
-              {currentPost.attachmentImage && (
-                <div className="mt-6 p-4 sm:p-5 rounded-2xl bg-[#131320] border border-orange-500/40 flex flex-col sm:flex-row sm:items-center justify-between gap-4 shadow-lg">
-                  <div className="flex items-center gap-3.5 overflow-hidden">
-                    <div className="p-3 rounded-2xl bg-orange-500/20 text-orange-400 shrink-0">
-                      <Paperclip className="w-5 h-5" />
-                    </div>
-                    <div className="overflow-hidden">
-                      <div className="flex items-center gap-2">
-                        <span className="text-xs font-black text-orange-400 uppercase tracking-wider">
-                          첨부파일 (1개)
-                        </span>
-                        <span className="text-[11px] text-zinc-400 font-mono">
-                          {currentPost.attachmentSize || '412 KB'}
-                        </span>
-                        <span className="text-[10px] px-2 py-0.5 rounded bg-emerald-500/20 text-emerald-300 font-semibold border border-emerald-500/30">
-                          정식 인가 공시
-                        </span>
-                      </div>
-                      <p className="text-sm font-bold text-white truncate mt-1">
-                        {currentPost.attachmentName || '교습비등_게시표_제8조관련_그레이드원대치10관.jpg'}
-                      </p>
-                    </div>
-                  </div>
-
-                  <div className="flex items-center gap-2 shrink-0">
-                    <button
-                      type="button"
-                      onClick={() => {
-                        const el = document.getElementById('notice-attachment-viewer');
-                        if (el) el.scrollIntoView({ behavior: 'smooth' });
-                        setIsLightboxOpen(true);
-                      }}
-                      className="px-3.5 py-2 rounded-xl bg-[#1c1c2e] hover:bg-[#282842] text-zinc-200 border border-[#2f2f48] text-xs font-bold transition-all flex items-center gap-1.5 cursor-pointer shadow"
-                    >
-                      <Eye className="w-3.5 h-3.5 text-orange-400" />
-                      <span>첨부 미리보기</span>
-                    </button>
-                    <a
-                      href={currentPost.attachmentImage}
-                      download={currentPost.attachmentName || '교습비등_게시표_그레이드원대치10관.jpg'}
-                      className="px-4 py-2 rounded-xl text-black text-xs font-extrabold flex items-center gap-1.5 transition-all hover:brightness-110 active:scale-95 cursor-pointer shadow-lg"
-                      style={{ backgroundColor: theme.primaryColor }}
-                    >
-                      <Download className="w-3.5 h-3.5" />
-                      <span>다운로드</span>
-                    </a>
-                  </div>
-                </div>
-              )}
             </div>
 
             {/* Post Image (if present) */}
@@ -295,9 +242,179 @@ export const NoticePage: React.FC<NoticePageProps> = ({
               </p>
             </div>
 
+            {/* Main Content Body */}
+            <div className="bg-[#0f0f17] border border-[#222234] rounded-3xl p-6 sm:p-10 shadow-xl space-y-6">
+              <div className="text-zinc-200 text-sm sm:text-base leading-relaxed whitespace-pre-line font-normal space-y-4">
+                {currentPost.content}
+              </div>
 
+              {/* Tags */}
+              {currentPost.tags.length > 0 && (
+                <div className="pt-6 border-t border-[#1f1f2e] flex flex-wrap items-center gap-2">
+                  <Tag className="w-4 h-4 text-orange-400" />
+                  {currentPost.tags.map((tag, idx) => (
+                    <span
+                      key={idx}
+                      className="text-xs text-zinc-300 bg-[#161624] px-3 py-1 rounded-xl border border-[#27273c]"
+                    >
+                      #{tag}
+                    </span>
+                  ))}
+                </div>
+              )}
+            </div>
 
+            {/* OFFICIAL ATTACHMENT SECTION: 교습비등 게시표 */}
+            {currentPost.attachmentImage && (
+              <div className="bg-[#11111c] border-2 border-orange-500/50 rounded-3xl p-6 sm:p-8 shadow-2xl space-y-6">
+                <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-4 border-b border-[#242436]">
+                  <div className="flex items-start gap-3">
+                    <div className="p-3 rounded-2xl bg-orange-500/20 text-orange-400 shrink-0">
+                      <ShieldCheck className="w-6 h-6" />
+                    </div>
+                    <div>
+                      <div className="flex items-center gap-2">
+                        <span className="text-xs font-bold text-orange-400 uppercase tracking-wider">
+                          공식 법정 공시 첨부 문서
+                        </span>
+                        <span className="text-[11px] px-2.5 py-0.5 rounded-full bg-emerald-500/20 text-emerald-300 font-semibold border border-emerald-500/30">
+                          강남서초교육지원청 등록 제12125호
+                        </span>
+                      </div>
+                      <h3 className="text-lg sm:text-xl font-bold text-white mt-1">
+                        {currentPost.attachmentTitle || '[별지 제18호서식] 교습비등 게시표 원본'}
+                      </h3>
+                      <p className="text-xs text-zinc-400 mt-1">
+                        「학원의 설립·운영 및 과외교습에 관한 법률」 제15조 제3항 및 동법 시행규칙 제14조에 따른 정식 공시 문서입니다.
+                      </p>
+                    </div>
+                  </div>
 
+                  {/* Zoom & Full View Controls */}
+                  <div className="flex items-center gap-2 shrink-0">
+                    <button
+                      type="button"
+                      onClick={() => setZoomScale((prev) => Math.max(prev - 0.2, 0.8))}
+                      className="p-2 rounded-xl bg-[#1b1b2a] hover:bg-[#252538] text-zinc-300 border border-[#2b2b40] cursor-pointer"
+                      title="축소"
+                    >
+                      <ZoomOut className="w-4 h-4" />
+                    </button>
+                    <button
+                      type="button"
+                      onClick={() => setZoomScale(1)}
+                      className="px-2.5 py-2 rounded-xl bg-[#1b1b2a] hover:bg-[#252538] text-xs font-mono text-zinc-300 border border-[#2b2b40] cursor-pointer"
+                      title="100% 원본 비율"
+                    >
+                      {Math.round(zoomScale * 100)}%
+                    </button>
+                    <button
+                      type="button"
+                      onClick={() => setZoomScale((prev) => Math.min(prev + 0.2, 2.5))}
+                      className="p-2 rounded-xl bg-[#1b1b2a] hover:bg-[#252538] text-zinc-300 border border-[#2b2b40] cursor-pointer"
+                      title="확대"
+                    >
+                      <ZoomIn className="w-4 h-4" />
+                    </button>
+                    <button
+                      type="button"
+                      onClick={() => setIsLightboxOpen(true)}
+                      className="flex items-center gap-1.5 px-4 py-2 rounded-xl text-xs font-bold text-black cursor-pointer shadow-lg hover:brightness-110 active:scale-95 transition-all"
+                      style={{ backgroundColor: theme.primaryColor }}
+                    >
+                      <Maximize2 className="w-3.5 h-3.5" />
+                      <span>전체화면 확대</span>
+                    </button>
+                  </div>
+                </div>
+
+                {/* High Resolution Document Display */}
+                <div
+                  onClick={() => setIsLightboxOpen(true)}
+                  className="relative rounded-2xl overflow-hidden border border-[#26263a] bg-black/80 cursor-pointer group shadow-inner transition-all hover:border-orange-500"
+                  title="클릭하여 고화질 원본으로 확대보기"
+                >
+                  <div className="p-4 sm:p-8 flex items-center justify-center min-h-[380px] sm:min-h-[500px] overflow-auto">
+                    <img
+                      src={currentPost.attachmentImage}
+                      alt={currentPost.attachmentTitle || '교습비등 게시표 원본'}
+                      style={{ transform: `scale(${zoomScale})`, transformOrigin: 'center center' }}
+                      className="max-h-[600px] w-auto max-w-full object-contain mx-auto transition-transform duration-200"
+                    />
+                  </div>
+
+                  <div className="absolute inset-0 bg-black/30 group-hover:bg-black/10 transition-colors pointer-events-none flex items-center justify-center">
+                    <div className="opacity-0 group-hover:opacity-100 transition-opacity px-4 py-2 rounded-xl bg-black/80 backdrop-blur-md border border-white/20 text-white text-xs font-bold flex items-center gap-2 shadow-2xl">
+                      <ZoomIn className="w-4 h-4 text-orange-400" />
+                      <span>클릭하여 고화질 원본 확대보기</span>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Legal & Transparent Tuition Disclosure Table Summary */}
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-xs text-zinc-300 bg-[#0e0e16] p-5 rounded-2xl border border-[#202030]">
+                  <div className="space-y-2">
+                    <h5 className="font-bold text-white flex items-center gap-1.5">
+                      <Check className="w-3.5 h-3.5 text-orange-400" />
+                      학원 정식 등록 및 기본 공시 사항
+                    </h5>
+                    <ul className="space-y-1 text-zinc-400">
+                      <li>• 학원명: 그레이드원대치10관수학학원</li>
+                      <li>• 등록번호: 강남서초교육지원청 등록 제12125호</li>
+                      <li>• 위치: 서울특별시 강남구 도곡로 184 (도곡동) 4층</li>
+                      <li>• 대표자/원장: 이선규 원장</li>
+                    </ul>
+                  </div>
+
+                  <div className="space-y-2">
+                    <h5 className="font-bold text-white flex items-center gap-1.5">
+                      <Check className="w-3.5 h-3.5 text-orange-400" />
+                      수강료 할인 혜택 및 반환 기준 안내
+                    </h5>
+                    <ul className="space-y-1 text-zinc-400">
+                      <li>• <strong>형제/자매 할인</strong>: 2인 이상 동시 수강 시 수강료 5% 감면 혜택</li>
+                      <li>• <strong>교습비 반환 규정</strong>: 「학원의 설립·운영 및 과외교습에 관한 법률」 제18조(교습비등의 반환 등)에 의거하여 수업 개시 전 전액 환불, 개시 후 경과 일수에 따른 정산 환불을 철저히 준수합니다.</li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+            )}
+
+            {/* Bottom Consultation Booking & Phone Action Banner */}
+            <div className="bg-gradient-to-r from-[#171725] via-[#1b1b2d] to-[#141420] border border-orange-500/40 rounded-3xl p-6 sm:p-8 flex flex-col md:flex-row items-center justify-between gap-6 shadow-2xl">
+              <div>
+                <span className="text-xs font-bold text-orange-400 uppercase tracking-wider">
+                  Consultation & Registration
+                </span>
+                <h4 className="text-lg sm:text-2xl font-black text-white mt-1">
+                  대치10관 수강 문의 및 개별 맞춤 클리닉 예약
+                </h4>
+                <p className="text-xs sm:text-sm text-zinc-400 mt-1 max-w-xl">
+                  자녀의 현재 성적과 취약점을 분석하여 원장단이 직접 1:1 학습 로드맵을 설계해 드립니다.
+                </p>
+              </div>
+
+              <div className="flex items-center gap-3 shrink-0">
+                <button
+                  type="button"
+                  onClick={onOpenCallModal}
+                  className="flex items-center gap-2 px-4 py-3 rounded-2xl bg-[#161624] hover:bg-[#202034] text-zinc-200 border border-[#2e2e44] text-xs font-bold transition-all cursor-pointer"
+                >
+                  <PhoneCall className="w-4 h-4 text-orange-400" />
+                  <span>전화문의 02-573-3133</span>
+                </button>
+
+                <button
+                  type="button"
+                  onClick={() => onOpenBooking('대치동 1:1 개별맞춤 클리닉')}
+                  className="flex items-center gap-2 px-6 py-3 rounded-2xl text-xs font-black text-black cursor-pointer shadow-lg hover:brightness-110 active:scale-95 transition-all"
+                  style={{ backgroundColor: theme.primaryColor }}
+                >
+                  <MessageSquare className="w-4 h-4" />
+                  <span>1:1 상담 신청하기</span>
+                </button>
+              </div>
+            </div>
 
             {/* Prev & Next Notice Controls */}
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-4">
@@ -530,19 +647,10 @@ export const NoticePage: React.FC<NoticePageProps> = ({
               >
                 <ZoomIn className="w-4 h-4" />
               </button>
-              <a
-                href={currentPost.attachmentImage}
-                download={currentPost.attachmentName || '교습비등_게시표_그레이드원대치10관.jpg'}
-                className="px-3 py-2 rounded-xl bg-orange-500/20 hover:bg-orange-500/30 text-orange-400 border border-orange-500/40 font-bold text-xs flex items-center gap-1.5 cursor-pointer"
-                title="다운로드"
-              >
-                <Download className="w-3.5 h-3.5" />
-                <span className="hidden sm:inline">다운로드</span>
-              </a>
               <button
                 type="button"
                 onClick={() => setIsLightboxOpen(false)}
-                className="p-2 rounded-xl bg-orange-500 text-black hover:bg-orange-400 font-bold cursor-pointer ml-1"
+                className="p-2 rounded-xl bg-orange-500 text-black hover:bg-orange-400 font-bold cursor-pointer ml-2"
                 title="닫기"
               >
                 닫기 ✕

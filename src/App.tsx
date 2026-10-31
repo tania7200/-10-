@@ -71,8 +71,6 @@ export default function App() {
         setCurrentPage('notice');
         if (parts[1]) {
           setSelectedNoticeId(parts[1]);
-        } else {
-          setSelectedNoticeId('post-6');
         }
       } else if (hash === '' || hash === '#' || hash === '#home') {
         setCurrentPage('home');
@@ -190,9 +188,8 @@ export default function App() {
         }}
         onNavigateToNoticePage={(postId) => {
           setCurrentPage('notice');
-          const targetId = postId || 'post-6';
-          setSelectedNoticeId(targetId);
-          window.location.hash = `#notice/${targetId}`;
+          setSelectedNoticeId(postId || null);
+          window.location.hash = postId ? `#notice/${postId}` : '#notice';
           window.scrollTo({ top: 0, behavior: 'smooth' });
         }}
         onOpenBooking={() => {

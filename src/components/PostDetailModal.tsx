@@ -6,8 +6,7 @@
 import React, { useState } from 'react';
 import { 
   X, Calendar, Eye, User, Share2, Check, ArrowRight, Tag, 
-  FileText, Maximize2, ZoomIn, ZoomOut, ExternalLink, ShieldCheck,
-  Paperclip, Download
+  FileText, Maximize2, ZoomIn, ZoomOut, ExternalLink, ShieldCheck
 } from 'lucide-react';
 import { Post, ThemeSettings } from '../types';
 
@@ -123,8 +122,13 @@ export const PostDetailModal: React.FC<PostDetailModalProps> = ({
                   <Eye className="w-3.5 h-3.5 text-orange-400" />
                   조회수 {post.views}
                 </span>
+                {post.attachmentImage && (
+                  <span className="flex items-center gap-1 text-orange-400 font-semibold bg-orange-500/10 px-2.5 py-0.5 rounded-full border border-orange-500/30">
+                    <FileText className="w-3 h-3" />
+                    교습비등 게시표 첨부
+                  </span>
+                )}
               </div>
-
             </div>
 
             {/* Summary Box */}
@@ -164,15 +168,6 @@ export const PostDetailModal: React.FC<PostDetailModalProps> = ({
                   </div>
 
                   <div className="flex items-center gap-2 shrink-0">
-                    <a
-                      href={post.attachmentImage}
-                      download={post.attachmentName || '교습비등_게시표_그레이드원대치10관.jpg'}
-                      className="px-3.5 py-2.5 rounded-xl text-xs font-bold bg-[#1d1d2e] hover:bg-[#28283e] text-zinc-200 border border-[#35354c] flex items-center justify-center gap-1.5 transition-all cursor-pointer shadow"
-                      title="첨부파일 다운로드"
-                    >
-                      <Download className="w-3.5 h-3.5 text-orange-400" />
-                      <span>다운로드</span>
-                    </a>
                     {onOpenNoticePage && (
                       <button
                         type="button"
@@ -220,70 +215,6 @@ export const PostDetailModal: React.FC<PostDetailModalProps> = ({
                       <ZoomIn className="w-4 h-4 text-orange-400" />
                       <span>클릭하여 고화질 원본 전체화면으로 확인</span>
                     </div>
-                  </div>
-                </div>
-
-                {/* Course by Course Fee Schedule Table */}
-                <div className="space-y-2 pt-2">
-                  <div className="flex items-center justify-between text-xs">
-                    <span className="font-bold text-white flex items-center gap-1.5">
-                      <FileText className="w-3.5 h-3.5 text-orange-400" />
-                      교습과정별 교습비 공시 요약
-                    </span>
-                    <span className="text-[10px] text-zinc-400 font-mono">
-                      강남서초교육지원청 등록 제12125호
-                    </span>
-                  </div>
-
-                  <div className="overflow-x-auto rounded-xl border border-[#222234] bg-[#0c0c14]">
-                    <table className="w-full text-left text-[11px] text-zinc-300">
-                      <thead className="bg-[#141420] text-zinc-400 font-bold border-b border-[#222234]">
-                        <tr>
-                          <th className="py-2 px-2.5">과정명</th>
-                          <th className="py-2 px-2 text-center">정원</th>
-                          <th className="py-2 px-2 text-center">총시간</th>
-                          <th className="py-2 px-2.5 text-right">월교습비</th>
-                          <th className="py-2 px-2 text-center">기간</th>
-                        </tr>
-                      </thead>
-                      <tbody className="divide-y divide-[#181826]">
-                        <tr>
-                          <td className="py-1.5 px-2.5 font-medium text-white">초등(2시간)</td>
-                          <td className="py-1.5 px-2 text-center text-zinc-400">10명</td>
-                          <td className="py-1.5 px-2 text-center font-mono text-zinc-400">150분*8회</td>
-                          <td className="py-1.5 px-2.5 text-right font-bold text-orange-400">350,000원</td>
-                          <td className="py-1.5 px-2 text-center text-zinc-400">4주</td>
-                        </tr>
-                        <tr>
-                          <td className="py-1.5 px-2.5 font-medium text-white">초등(3시간)</td>
-                          <td className="py-1.5 px-2 text-center text-zinc-400">10명</td>
-                          <td className="py-1.5 px-2 text-center font-mono text-zinc-400">210분*8회</td>
-                          <td className="py-1.5 px-2.5 text-right font-bold text-orange-400">400,000원</td>
-                          <td className="py-1.5 px-2 text-center text-zinc-400">4주</td>
-                        </tr>
-                        <tr>
-                          <td className="py-1.5 px-2.5 font-medium text-white">중등(3시간)</td>
-                          <td className="py-1.5 px-2 text-center text-zinc-400">10명</td>
-                          <td className="py-1.5 px-2 text-center font-mono text-zinc-400">240분*8회</td>
-                          <td className="py-1.5 px-2.5 text-right font-bold text-orange-400">500,000원</td>
-                          <td className="py-1.5 px-2 text-center text-zinc-400">4주</td>
-                        </tr>
-                        <tr>
-                          <td className="py-1.5 px-2.5 font-medium text-white">고등(3시간)</td>
-                          <td className="py-1.5 px-2 text-center text-zinc-400">10명</td>
-                          <td className="py-1.5 px-2 text-center font-mono text-zinc-400">250분*8회</td>
-                          <td className="py-1.5 px-2.5 text-right font-bold text-orange-400">550,000원</td>
-                          <td className="py-1.5 px-2 text-center text-zinc-400">4주</td>
-                        </tr>
-                        <tr>
-                          <td className="py-1.5 px-2.5 font-medium text-white">고등(5시간)</td>
-                          <td className="py-1.5 px-2 text-center text-zinc-400">10명</td>
-                          <td className="py-1.5 px-2 text-center font-mono text-zinc-400">300분*8회</td>
-                          <td className="py-1.5 px-2.5 text-right font-bold text-orange-400">630,000원</td>
-                          <td className="py-1.5 px-2 text-center text-zinc-400">4주</td>
-                        </tr>
-                      </tbody>
-                    </table>
                   </div>
                 </div>
 
@@ -391,14 +322,6 @@ export const PostDetailModal: React.FC<PostDetailModalProps> = ({
                   title="새 창에서 원본 보기"
                 >
                   <ExternalLink className="w-4 h-4" />
-                </a>
-                <a
-                  href={post.attachmentImage}
-                  download={post.attachmentName || '교습비등_게시표_그레이드원대치10관.jpg'}
-                  className="p-1.5 sm:p-2 rounded-lg bg-orange-500/20 hover:bg-orange-500/30 text-orange-400 border border-orange-500/40 transition-colors cursor-pointer"
-                  title="다운로드"
-                >
-                  <Download className="w-4 h-4" />
                 </a>
                 <button
                   type="button"

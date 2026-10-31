@@ -19,8 +19,6 @@ export interface Post {
   imageUrl?: string;
   attachmentImage?: string;
   attachmentTitle?: string;
-  attachmentName?: string;
-  attachmentSize?: string;
   hasAttachmentNotice?: boolean;
   isPublished: boolean;
 }
