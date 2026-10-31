@@ -4,7 +4,7 @@
  */
 
 import React, { useState } from 'react';
-import { Newspaper, Search, PlusCircle, Pin, Eye, Calendar, User, Tag, ArrowRight, Edit3, Trash2, FileText } from 'lucide-react';
+import { Newspaper, Search, PlusCircle, Pin, Eye, Calendar, User, Tag, ArrowRight, Edit3, Trash2, FileText, ExternalLink } from 'lucide-react';
 import { Post, PostCategory, ThemeSettings } from '../types';
 
 interface PostsSectionProps {
@@ -14,6 +14,7 @@ interface PostsSectionProps {
   onOpenNewPostModal: () => void;
   onEditPost: (post: Post) => void;
   onDeletePost: (postId: string) => void;
+  onOpenNoticePage?: (postId?: string) => void;
 }
 
 export const PostsSection: React.FC<PostsSectionProps> = ({
@@ -23,6 +24,7 @@ export const PostsSection: React.FC<PostsSectionProps> = ({
   onOpenNewPostModal,
   onEditPost,
   onDeletePost,
+  onOpenNoticePage,
 }) => {
   const [selectedCategory, setSelectedCategory] = useState<string>('전체');
   const [searchQuery, setSearchQuery] = useState<string>('');
@@ -61,15 +63,25 @@ export const PostsSection: React.FC<PostsSectionProps> = ({
             </p>
           </div>
 
-          {/* New Post Button */}
-          <div className="flex items-center gap-3">
+          {/* Buttons */}
+          <div className="flex flex-wrap items-center gap-3">
+            {onOpenNoticePage && (
+              <button
+                onClick={() => onOpenNoticePage()}
+                className="flex items-center gap-2 px-4 py-2.5 rounded-xl text-xs font-bold bg-[#181827] hover:bg-[#222238] text-white border border-[#2e2e44] transition-all hover:border-orange-500/50 active:scale-95 cursor-pointer shadow-md"
+              >
+                <ExternalLink className="w-3.5 h-3.5 text-orange-400" />
+                <span>공지사항 전용 페이지</span>
+              </button>
+            )}
+
             <button
               onClick={onOpenNewPostModal}
-              className="flex items-center gap-2 px-5 py-2.5 rounded-xl text-xs font-bold text-black transition-all hover:brightness-110 active:scale-95 cursor-pointer shadow-md"
+              className="flex items-center gap-2 px-4 sm:px-5 py-2.5 rounded-xl text-xs font-bold text-black transition-all hover:brightness-110 active:scale-95 cursor-pointer shadow-md"
               style={{ backgroundColor: theme.primaryColor }}
             >
               <PlusCircle className="w-4 h-4" />
-              <span>새 게시글 작성하기</span>
+              <span>새 게시글 작성</span>
             </button>
           </div>
         </div>

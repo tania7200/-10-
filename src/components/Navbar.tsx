@@ -12,6 +12,9 @@ interface NavbarProps {
   onOpenBooking: () => void;
   onOpenCallModal: () => void;
   onOpenAdmin: () => void;
+  currentPage?: 'home' | 'notice';
+  onNavigateToHome?: () => void;
+  onNavigateToNoticePage?: (postId?: string) => void;
 }
 
 export const Navbar: React.FC<NavbarProps> = ({
@@ -19,6 +22,9 @@ export const Navbar: React.FC<NavbarProps> = ({
   onOpenBooking,
   onOpenCallModal,
   onOpenAdmin,
+  currentPage = 'home',
+  onNavigateToHome,
+  onNavigateToNoticePage,
 }) => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
@@ -26,13 +32,35 @@ export const Navbar: React.FC<NavbarProps> = ({
     { label: '원장소개', href: '#about' },
     { label: '1:1 맞춤 시스템', href: '#system' },
     { label: '커리큘럼', href: '#curriculum' },
-    { label: '공지/자료실', href: '#posts' },
+    { label: '공지사항 (새 페이지)', href: '#notice', isNoticePage: true },
     { label: '오시는 길', href: '#location' },
   ];
 
-  const handleNavClick = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
+  const handleNavClick = (e: React.MouseEvent<HTMLAnchorElement>, href: string, isNoticePage?: boolean) => {
     e.preventDefault();
     setMobileMenuOpen(false);
+
+    if (isNoticePage && onNavigateToNoticePage) {
+      onNavigateToNoticePage();
+      return;
+    }
+
+    if (currentPage === 'notice' && onNavigateToHome) {
+      onNavigateToHome();
+      setTimeout(() => {
+        const element = document.querySelector(href);
+        if (element) {
+          const navHeight = 80;
+          const elementPosition = element.getBoundingClientRect().top + window.scrollY;
+          window.scrollTo({
+            top: elementPosition - navHeight,
+            behavior: 'smooth',
+          });
+        }
+      }, 50);
+      return;
+    }
+
     const element = document.querySelector(href);
     if (element) {
       const navHeight = 80;
@@ -69,7 +97,15 @@ export const Navbar: React.FC<NavbarProps> = ({
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-20">
           {/* Logo */}
-          <a href="#" className="flex items-center gap-3 group">
+          <a 
+            href="#" 
+            onClick={(e) => {
+              e.preventDefault();
+              if (onNavigateToHome) onNavigateToHome();
+              window.scrollTo({ top: 0, behavior: 'smooth' });
+            }}
+            className="flex items-center gap-3 group"
+          >
             <div 
               className="w-10 h-10 rounded-xl flex items-center justify-center font-black text-black text-lg shadow-lg transition-transform group-hover:scale-105"
               style={{ 
@@ -103,12 +139,18 @@ export const Navbar: React.FC<NavbarProps> = ({
               <a
                 key={link.href}
                 href={link.href}
-                onClick={(e) => handleNavClick(e, link.href)}
-                className="text-sm font-medium text-zinc-300 hover:text-white transition-colors relative py-1 group"
+                onClick={(e) => handleNavClick(e, link.href, link.isNoticePage)}
+                className={`text-sm font-medium transition-colors relative py-1 group ${
+                  link.isNoticePage && currentPage === 'notice'
+                    ? 'text-white font-bold'
+                    : 'text-zinc-300 hover:text-white'
+                }`}
               >
                 {link.label}
                 <span 
-                  className="absolute bottom-0 left-0 w-0 h-0.5 transition-all duration-300 group-hover:w-full"
+                  className={`absolute bottom-0 left-0 transition-all duration-300 ${
+                    link.isNoticePage && currentPage === 'notice' ? 'w-full h-0.5' : 'w-0 h-0.5 group-hover:w-full'
+                  }`}
                   style={{ backgroundColor: theme.primaryColor }}
                 />
               </a>
@@ -178,8 +220,12 @@ export const Navbar: React.FC<NavbarProps> = ({
               <a
                 key={link.href}
                 href={link.href}
-                onClick={(e) => handleNavClick(e, link.href)}
-                className="text-zinc-200 hover:text-white font-medium py-2 px-3 rounded-lg hover:bg-[#1a1a26] text-sm"
+                onClick={(e) => handleNavClick(e, link.href, link.isNoticePage)}
+                className={`font-medium py-2 px-3 rounded-lg text-sm transition-colors ${
+                  link.isNoticePage && currentPage === 'notice'
+                    ? 'bg-orange-500/15 text-orange-400 font-bold border border-orange-500/30'
+                    : 'text-zinc-200 hover:text-white hover:bg-[#1a1a26]'
+                }`}
               >
                 {link.label}
               </a>

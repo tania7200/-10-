@@ -15,6 +15,7 @@ interface PostDetailModalProps {
   onClose: () => void;
   onOpenBooking: () => void;
   theme: ThemeSettings;
+  onOpenNoticePage?: (postId: string) => void;
 }
 
 export const PostDetailModal: React.FC<PostDetailModalProps> = ({
@@ -22,6 +23,7 @@ export const PostDetailModal: React.FC<PostDetailModalProps> = ({
   onClose,
   onOpenBooking,
   theme,
+  onOpenNoticePage,
 }) => {
   const [copied, setCopied] = useState(false);
   const [isLightboxOpen, setIsLightboxOpen] = useState(false);
@@ -58,6 +60,19 @@ export const PostDetailModal: React.FC<PostDetailModalProps> = ({
             </div>
 
             <div className="flex items-center gap-2">
+              {onOpenNoticePage && (
+                <button
+                  onClick={() => {
+                    onClose();
+                    onOpenNoticePage(post.id);
+                  }}
+                  className="flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-xs font-bold bg-[#1a1a28] hover:bg-[#252538] text-orange-400 border border-orange-500/30 transition-all cursor-pointer"
+                  title="공지사항 전용 페이지에서 크게 보기"
+                >
+                  <ExternalLink className="w-3.5 h-3.5" />
+                  <span className="hidden sm:inline">새 페이지로 열기</span>
+                </button>
+              )}
               <button
                 onClick={handleShare}
                 className="p-2 rounded-xl text-zinc-400 hover:text-white bg-[#1a1a26] hover:bg-[#252538] transition-colors cursor-pointer"
@@ -152,18 +167,33 @@ export const PostDetailModal: React.FC<PostDetailModalProps> = ({
                     </div>
                   </div>
 
-                  <button
-                    type="button"
-                    onClick={() => {
-                      setZoomScale(1);
-                      setIsLightboxOpen(true);
-                    }}
-                    className="px-4 py-2.5 rounded-xl text-xs font-bold text-black flex items-center justify-center gap-1.5 transition-all hover:brightness-110 active:scale-95 cursor-pointer shadow-lg shrink-0"
-                    style={{ backgroundColor: theme.primaryColor }}
-                  >
-                    <Maximize2 className="w-3.5 h-3.5" />
-                    <span>게시표 원본 크게보기</span>
-                  </button>
+                  <div className="flex items-center gap-2 shrink-0">
+                    {onOpenNoticePage && (
+                      <button
+                        type="button"
+                        onClick={() => {
+                          onClose();
+                          onOpenNoticePage(post.id);
+                        }}
+                        className="px-3.5 py-2.5 rounded-xl text-xs font-bold bg-[#1d1d2e] hover:bg-[#28283e] text-zinc-200 border border-[#35354c] flex items-center justify-center gap-1.5 transition-all cursor-pointer shadow"
+                      >
+                        <FileText className="w-3.5 h-3.5 text-orange-400" />
+                        <span>새 페이지에서 보기</span>
+                      </button>
+                    )}
+                    <button
+                      type="button"
+                      onClick={() => {
+                        setZoomScale(1);
+                        setIsLightboxOpen(true);
+                      }}
+                      className="px-4 py-2.5 rounded-xl text-xs font-bold text-black flex items-center justify-center gap-1.5 transition-all hover:brightness-110 active:scale-95 cursor-pointer shadow-lg shrink-0"
+                      style={{ backgroundColor: theme.primaryColor }}
+                    >
+                      <Maximize2 className="w-3.5 h-3.5" />
+                      <span>게시표 원본 크게보기</span>
+                    </button>
+                  </div>
                 </div>
 
                 {/* Clickable Image Preview Card */}

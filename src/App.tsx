@@ -17,6 +17,7 @@ import { PostDetailModal } from './components/PostDetailModal';
 import { PhoneCallModal } from './components/PhoneCallModal';
 import { AdminCustomizerModal } from './components/AdminCustomizerModal';
 import { LegalModal } from './components/LegalModal';
+import { NoticePage } from './components/NoticePage';
 
 import {
   Post,
@@ -46,6 +47,10 @@ export default function App() {
   const [posts, setPosts] = useState<Post[]>(loadStoredPosts);
   const [bookings, setBookings] = useState<ConsultationBooking[]>(loadStoredBookings);
 
+  // Page Routing State ('home' vs dedicated 'notice' page)
+  const [currentPage, setCurrentPage] = useState<'home' | 'notice'>('home');
+  const [selectedNoticeId, setSelectedNoticeId] = useState<string | null>(null);
+
   // Modals state
   const [isBookingOpen, setIsBookingOpen] = useState<boolean>(false);
   const [selectedBookingTrack, setSelectedBookingTrack] = useState<TargetTrack>('대치동 1:1 개별맞춤 클리닉');
@@ -56,6 +61,25 @@ export default function App() {
   const [editingPostData, setEditingPostData] = useState<Post | null>(null);
   const [isLegalOpen, setIsLegalOpen] = useState<boolean>(false);
   const [legalType, setLegalType] = useState<'terms' | 'privacy'>('terms');
+
+  // Handle URL hash routing (#notice, #notice/post-1)
+  useEffect(() => {
+    const handleHash = () => {
+      const hash = window.location.hash;
+      if (hash.startsWith('#notice')) {
+        const parts = hash.split('/');
+        setCurrentPage('notice');
+        if (parts[1]) {
+          setSelectedNoticeId(parts[1]);
+        }
+      } else if (hash === '' || hash === '#' || hash === '#home') {
+        setCurrentPage('home');
+      }
+    };
+    handleHash();
+    window.addEventListener('hashchange', handleHash);
+    return () => window.removeEventListener('hashchange', handleHash);
+  }, []);
 
   // Dynamic document title & styling sync
   useEffect(() => {
@@ -155,6 +179,19 @@ export default function App() {
       {/* Navbar */}
       <Navbar
         theme={theme}
+        currentPage={currentPage}
+        onNavigateToHome={() => {
+          setCurrentPage('home');
+          setSelectedNoticeId(null);
+          window.location.hash = '';
+          window.scrollTo({ top: 0, behavior: 'smooth' });
+        }}
+        onNavigateToNoticePage={(postId) => {
+          setCurrentPage('notice');
+          setSelectedNoticeId(postId || null);
+          window.location.hash = postId ? `#notice/${postId}` : '#notice';
+          window.scrollTo({ top: 0, behavior: 'smooth' });
+        }}
         onOpenBooking={() => {
           setSelectedBookingTrack('대치동 1:1 개별맞춤 클리닉');
           setIsBookingOpen(true);
@@ -166,59 +203,90 @@ export default function App() {
         }}
       />
 
-      {/* Main Content */}
+      {/* Main Content: Either Home Landing OR Dedicated Notice Page */}
       <main className="flex-1">
-        {/* 1. Hero Section */}
-        <HeroSection
-          theme={theme}
-          onOpenBooking={() => {
-            setSelectedBookingTrack('대치동 1:1 개별맞춤 클리닉');
-            setIsBookingOpen(true);
-          }}
-          onOpenCallModal={() => setIsCallModalOpen(true)}
-        />
+        {currentPage === 'notice' ? (
+          <NoticePage
+            posts={posts}
+            selectedPostId={selectedNoticeId}
+            theme={theme}
+            onSelectPost={(postId) => {
+              setSelectedNoticeId(postId || null);
+              window.location.hash = postId ? `#notice/${postId}` : '#notice';
+            }}
+            onBackToHome={() => {
+              setCurrentPage('home');
+              setSelectedNoticeId(null);
+              window.location.hash = '';
+              window.scrollTo({ top: 0, behavior: 'smooth' });
+            }}
+            onOpenBooking={(track) => {
+              if (track) setSelectedBookingTrack(track);
+              setIsBookingOpen(true);
+            }}
+            onOpenCallModal={() => setIsCallModalOpen(true)}
+          />
+        ) : (
+          <>
+            {/* 1. Hero Section */}
+            <HeroSection
+              theme={theme}
+              onOpenBooking={() => {
+                setSelectedBookingTrack('대치동 1:1 개별맞춤 클리닉');
+                setIsBookingOpen(true);
+              }}
+              onOpenCallModal={() => setIsCallModalOpen(true)}
+            />
 
-        {/* 2. 1:1 Individual Coaching System Section */}
-        <IndividualSystemSection
-          theme={theme}
-          onOpenBooking={() => {
-            setSelectedBookingTrack('대치동 1:1 개별맞춤 클리닉');
-            setIsBookingOpen(true);
-          }}
-        />
+            {/* 2. 1:1 Individual Coaching System Section */}
+            <IndividualSystemSection
+              theme={theme}
+              onOpenBooking={() => {
+                setSelectedBookingTrack('대치동 1:1 개별맞춤 클리닉');
+                setIsBookingOpen(true);
+              }}
+            />
 
-        {/* 3. Elite Faculty */}
-        <FacultySection
-          faculty={initialFaculty}
-          theme={theme}
-        />
+            {/* 3. Elite Faculty */}
+            <FacultySection
+              faculty={initialFaculty}
+              theme={theme}
+            />
 
-        {/* 7. Posts & Mathematical Insights CMS */}
-        <PostsSection
-          posts={posts}
-          theme={theme}
-          onOpenPostDetail={handleOpenPostDetail}
-          onOpenNewPostModal={() => {
-            setAdminTab('posts');
-            setIsAdminOpen(true);
-          }}
-          onEditPost={(p) => {
-            setEditingPostData(p);
-            setAdminTab('posts');
-            setIsAdminOpen(true);
-          }}
-          onDeletePost={handleDeletePost}
-        />
+            {/* 7. Posts & Mathematical Insights CMS */}
+            <PostsSection
+              posts={posts}
+              theme={theme}
+              onOpenPostDetail={handleOpenPostDetail}
+              onOpenNoticePage={(postId) => {
+                setCurrentPage('notice');
+                setSelectedNoticeId(postId || null);
+                window.location.hash = postId ? `#notice/${postId}` : '#notice';
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+              }}
+              onOpenNewPostModal={() => {
+                setAdminTab('posts');
+                setIsAdminOpen(true);
+              }}
+              onEditPost={(p) => {
+                setEditingPostData(p);
+                setAdminTab('posts');
+                setIsAdminOpen(true);
+              }}
+              onDeletePost={handleDeletePost}
+            />
 
-        {/* 8. Campus Map & Location */}
-        <LocationSection
-          theme={theme}
-          onOpenBooking={() => {
-            setSelectedBookingTrack('대치동 1:1 개별맞춤 클리닉');
-            setIsBookingOpen(true);
-          }}
-          onOpenCallModal={() => setIsCallModalOpen(true)}
-        />
+            {/* 8. Campus Map & Location */}
+            <LocationSection
+              theme={theme}
+              onOpenBooking={() => {
+                setSelectedBookingTrack('대치동 1:1 개별맞춤 클리닉');
+                setIsBookingOpen(true);
+              }}
+              onOpenCallModal={() => setIsCallModalOpen(true)}
+            />
+          </>
+        )}
       </main>
 
       {/* Footer */}
@@ -240,7 +308,10 @@ export default function App() {
         onOpenTuitionNotice={() => {
           const tuitionPost = posts.find((p) => p.attachmentImage) || posts[0];
           if (tuitionPost) {
-            handleOpenPostDetail(tuitionPost);
+            setCurrentPage('notice');
+            setSelectedNoticeId(tuitionPost.id);
+            window.location.hash = `#notice/${tuitionPost.id}`;
+            window.scrollTo({ top: 0, behavior: 'smooth' });
           }
         }}
       />
@@ -273,6 +344,13 @@ export default function App() {
       <PostDetailModal
         post={activePostDetail}
         onClose={() => setActivePostDetail(null)}
+        onOpenNoticePage={(postId) => {
+          setActivePostDetail(null);
+          setCurrentPage('notice');
+          setSelectedNoticeId(postId);
+          window.location.hash = `#notice/${postId}`;
+          window.scrollTo({ top: 0, behavior: 'smooth' });
+        }}
         onOpenBooking={() => {
           setSelectedBookingTrack('대치동 1:1 개별맞춤 클리닉');
           setIsBookingOpen(true);
