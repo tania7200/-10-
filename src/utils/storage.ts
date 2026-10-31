@@ -7,7 +7,7 @@ import { Post, PostCategory, ThemeSettings, SeoSettings, ConsultationBooking } f
 import { initialPosts, initialThemeSettings, initialSeoSettings, initialBookings } from '../data/mockData';
 
 const STORAGE_KEYS = {
-  POSTS: 'gradeone_posts_v6',
+  POSTS: 'gradeone_posts_v7',
   THEME: 'gradeone_theme_v3',
   SEO: 'gradeone_seo_v2',
   BOOKINGS: 'gradeone_bookings_v2',
@@ -15,16 +15,40 @@ const STORAGE_KEYS = {
 
 export const loadStoredPosts = (): Post[] => {
   try {
+    // Clean up older keys that cause unwanted reversion
+    ['gradeone_posts_v1', 'gradeone_posts_v2', 'gradeone_posts_v3', 'gradeone_posts_v4', 'gradeone_posts_v5', 'gradeone_posts_v6'].forEach((k) => {
+      localStorage.removeItem(k);
+    });
+
     const data = localStorage.getItem(STORAGE_KEYS.POSTS);
     if (data) {
       const parsed: Post[] = JSON.parse(data);
       const validCategories: PostCategory[] = ['공지사항', '입시/합격소식', '국제학교'];
       return parsed
         .filter((p) => validCategories.includes(p.category))
-        .map((p) => ({
-          ...p,
-          content: p.content.replace(/뇌\s*구조/g, '학습 성향과 취약점'),
-        }));
+        .map((p) => {
+          // Ensure post-1 does not retain old attachment if cached
+          if (p.id === 'post-1') {
+            return {
+              ...p,
+              attachmentImage: undefined,
+              attachmentTitle: undefined,
+              attachmentName: undefined,
+              hasAttachmentNotice: false,
+              imageUrl: '/assets/images/korean_students_uniforms_1793451652162.jpg',
+            };
+          }
+          // Ensure post-6 has official attachment
+          if (p.id === 'post-6') {
+            return {
+              ...p,
+              imageUrl: '/assets/images/korean_students_uniforms_1793451652162.jpg',
+              attachmentImage: '/assets/aistudio/KakaoTalk_20261030_210917341_02_f133293f.jpg',
+              hasAttachmentNotice: true,
+            };
+          }
+          return p;
+        });
     }
   } catch (e) {
     console.error('Failed to load posts from storage', e);

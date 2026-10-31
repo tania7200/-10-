@@ -112,7 +112,7 @@ export const initialPosts: Post[] = [
     views: 1850,
     isPinned: false,
     tags: ['IB수학', 'APCalculus', '국제학교', 'AMC10', '채드윅', 'KIS', 'SIS'],
-    imageUrl: '/assets/images/female_high_school_students_studying_1793460260817.jpg',
+    imageUrl: '/assets/images/korean_students_uniforms_1793451652162.jpg',
     isPublished: true,
   },
 
