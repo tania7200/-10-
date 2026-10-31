@@ -56,20 +56,14 @@ export const initialPosts: Post[] = [
 3. 시험 4주 전부터 매주 주말 100분 실전 모의고사 & 1:1 클리닉
 4. 서술형 감점 제로(Zero)를 위한 스텝별 풀이과정 정밀 첨삭
 
-■ 학원 공식 공시 안내:
-「학원의 설립·운영 및 과외교습에 관한 법률」 제15조에 따른 교습과정별(초등부, 중등부, 고등부, 특강) 교습비등 게시표 원본이 본 공지에 정식 첨부되어 있습니다. 아래 [교습비등 게시표 확인하기]를 클릭하시면 강남서초교육지원청 등록 제12125호 및 과정별 상세 수강료/할인 규정 원본을 바로 열람하실 수 있습니다. (형제 동시 등록 시 5% 할인)
-
 ■ 수업 인원: 클래스당 최대 6인 소수정예 (선착순 마감)
 ■ 문의 및 레벨테스트 예약: 02-573-3133 (도곡로 184 4층)`,
     author: '대치10관 원장단',
     date: '2026-03-02',
     views: 1420,
     isPinned: true,
-    tags: ['내신대비', '강남8학군', '중간고사', '휘문고', '중동고', '교습비게시표'],
-    imageUrl: 'https://images.unsplash.com/photo-1434030216411-0b793f4b4173?auto=format&fit=crop&w=1200&q=80',
-    attachmentImage: '/assets/images/tuition_fee_table.jpg',
-    attachmentTitle: '[별지 제18호서식] 교습비등 게시표 (강남서초교육지원청 등록 제12125호)',
-    hasAttachmentNotice: true,
+    tags: ['내신대비', '강남8학군', '중간고사', '휘문고', '중동고'],
+    imageUrl: '/assets/images/korean_students_uniforms_1793451652162.jpg',
     isPublished: true,
   },
   {
@@ -118,7 +112,7 @@ export const initialPosts: Post[] = [
     views: 1850,
     isPinned: false,
     tags: ['IB수학', 'APCalculus', '국제학교', 'AMC10', '채드윅', 'KIS', 'SIS'],
-    imageUrl: 'https://images.unsplash.com/photo-1509228468518-180dd4864904?auto=format&fit=crop&w=1200&q=80',
+    imageUrl: '/assets/images/female_high_school_students_studying_1793460260817.jpg',
     isPublished: true,
   },
 
@@ -126,7 +120,7 @@ export const initialPosts: Post[] = [
     id: 'post-6',
     title: '[초등심화] 초등 5·6학년 영재원 및 중등 선행 심화 클리닉 10인 소수정예 모집',
     category: '공지사항',
-    summary: '초등 시기 잘못 들인 연산 습관을 바로잡고 증명 기반 논리적 사고력을 극대화하는 최상위 도약 프로그램.',
+    summary: '초등 시기 잘못 들인 연산 습관을 바로잡고 증명 기반 논리적 사고력을 극대화하는 최상위 도약 프로그램. [별지 제18호서식] 교습비등 게시표 포함.',
     content: `초등 고학년 시기는 단순 진도빼기보다 '깊게 생각하는 끈기'를 형성하는 가장 결정적인 골든타임입니다.
 
 ■ 프로그램 특징:
@@ -134,13 +128,21 @@ export const initialPosts: Post[] = [
 - 스스로 질문하고 풀이 경로를 도식화하는 생각하는 수학 노트 훈련
 - 중등 대수와 기하의 유기적 연결로 중·고등 진학 시 내신 흔들림 제로화
 
+■ 학원 공식 공시 안내:
+「학원의 설립·운영 및 과외교습에 관한 법률」 제15조에 따른 교습과정별(초등부, 중등부, 고등부, 특강) 교습비등 게시표 원본이 본 공지에 정식 첨부되어 있습니다. 아래 [교습비등 게시표 확인하기]를 클릭하시면 강남서초교육지원청 등록 제12125호 및 과정별 상세 수강료/할인 규정 원본을 바로 열람하실 수 있습니다. (형제 동시 등록 시 5% 할인)
+
 ■ 개강일: 매주 화/목 또는 수/금 선택제 (주말 클리닉 무료 지원)`,
     author: '초중등영재센터',
     date: '2025-12-28',
     views: 1670,
     isPinned: false,
-    tags: ['초등수학', '영재원', '중등선행', '대치초등수학'],
-    imageUrl: 'https://images.unsplash.com/photo-1503676260728-1c00da094a0b?auto=format&fit=crop&w=1200&q=80',
+    tags: ['초등수학', '영재원', '중등선행', '대치초등수학', '교습비게시표'],
+    imageUrl: '/assets/images/korean_students_uniforms_1793451652162.jpg',
+    attachmentImage: '/assets/aistudio/KakaoTalk_20261030_210917341_02_f133293f.jpg',
+    attachmentTitle: '[별지 제18호서식] 교습비등 게시표 (강남서초교육지원청 등록 제12125호)',
+    attachmentName: '교습비등_게시표_제8조관련_그레이드원대치10관.jpg',
+    attachmentSize: '412 KB',
+    hasAttachmentNotice: true,
     isPublished: true,
   },
 ];

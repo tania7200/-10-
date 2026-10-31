@@ -4,7 +4,7 @@
  */
 
 import React, { useState } from 'react';
-import { Newspaper, Search, PlusCircle, Pin, Eye, Calendar, User, Tag, ArrowRight, Edit3, Trash2, FileText, ExternalLink } from 'lucide-react';
+import { Newspaper, Search, PlusCircle, Pin, Eye, Calendar, User, Tag, ArrowRight, Edit3, Trash2, FileText, ExternalLink, Paperclip } from 'lucide-react';
 import { Post, PostCategory, ThemeSettings } from '../types';
 
 interface PostsSectionProps {
@@ -220,17 +220,17 @@ export const PostsSection: React.FC<PostsSectionProps> = ({
                     {post.attachmentImage && (
                       <div 
                         onClick={() => onOpenPostDetail(post)}
-                        className="mb-4 p-2.5 rounded-xl bg-[#181827] hover:bg-[#202035] border border-orange-500/30 flex items-center justify-between cursor-pointer transition-all group/att"
+                        className="mb-4 p-2.5 rounded-xl bg-[#161626] hover:bg-[#1f1f34] border border-orange-500/40 flex items-center justify-between cursor-pointer transition-all group/att shadow-sm"
                       >
                         <div className="flex items-center gap-2 overflow-hidden">
                           <span className="p-1 rounded-lg bg-orange-500/20 text-orange-400 shrink-0">
-                            <FileText className="w-3.5 h-3.5" />
+                            <Paperclip className="w-3.5 h-3.5" />
                           </span>
                           <span className="text-[11px] font-semibold text-zinc-300 group-hover/att:text-white truncate">
-                            {post.attachmentTitle || '교습비등 게시표 원본 첨부'}
+                            첨부: {post.attachmentName || post.attachmentTitle || '교습비등_게시표_공식문서.jpg'}
                           </span>
                         </div>
-                        <span className="text-[10px] text-orange-400 font-bold shrink-0 flex items-center gap-0.5">
+                        <span className="text-[10px] text-orange-400 font-bold shrink-0 flex items-center gap-0.5 ml-1">
                           클릭 열람 <ArrowRight className="w-2.5 h-2.5" />
                         </span>
                       </div>

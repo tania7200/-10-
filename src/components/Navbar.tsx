@@ -32,7 +32,7 @@ export const Navbar: React.FC<NavbarProps> = ({
     { label: '원장소개', href: '#about' },
     { label: '1:1 맞춤 시스템', href: '#system' },
     { label: '커리큘럼', href: '#curriculum' },
-    { label: '공지사항 (새 페이지)', href: '#notice', isNoticePage: true },
+    { label: '공지사항', href: '#notice', isNoticePage: true },
     { label: '오시는 길', href: '#location' },
   ];
 
