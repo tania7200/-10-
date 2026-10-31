@@ -17,6 +17,9 @@ export interface Post {
   isPinned?: boolean;
   tags: string[];
   imageUrl?: string;
+  attachmentImage?: string;
+  attachmentTitle?: string;
+  hasAttachmentNotice?: boolean;
   isPublished: boolean;
 }
 

@@ -13,6 +13,7 @@ interface FooterProps {
   onOpenCallModal: () => void;
   onOpenAdmin: () => void;
   onOpenLegal: (type: 'terms' | 'privacy') => void;
+  onOpenTuitionNotice?: () => void;
 }
 
 export const Footer: React.FC<FooterProps> = ({
@@ -21,6 +22,7 @@ export const Footer: React.FC<FooterProps> = ({
   onOpenCallModal,
   onOpenAdmin,
   onOpenLegal,
+  onOpenTuitionNotice,
 }) => {
   const scrollToTop = () => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -146,7 +148,13 @@ export const Footer: React.FC<FooterProps> = ({
               개인정보처리방침
             </span>
             <span>•</span>
-            <span className="hover:text-zinc-400 cursor-pointer">교습비 안내</span>
+            <span 
+              onClick={onOpenTuitionNotice}
+              className="hover:text-white cursor-pointer transition-colors text-zinc-400 hover:underline"
+              title="학원법에 따른 교습비등 게시표 공시 확인"
+            >
+              교습비등 게시표 안내
+            </span>
             <button
               onClick={scrollToTop}
               className="p-1.5 rounded-lg bg-[#14141e] hover:bg-[#1e1e2c] text-zinc-400 hover:text-white transition-colors ml-2 cursor-pointer"

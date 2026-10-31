@@ -237,6 +237,12 @@ export default function App() {
           setLegalType(type);
           setIsLegalOpen(true);
         }}
+        onOpenTuitionNotice={() => {
+          const tuitionPost = posts.find((p) => p.attachmentImage) || posts[0];
+          if (tuitionPost) {
+            handleOpenPostDetail(tuitionPost);
+          }
+        }}
       />
 
       {/* Sticky Bottom Floating Bar */}

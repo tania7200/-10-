@@ -163,6 +163,8 @@ export const AdminCustomizerModal: React.FC<AdminCustomizerModalProps> = ({
       isPinned: postIsPinned,
       tags: tagsArray,
       imageUrl: postImageUrl || undefined,
+      attachmentImage: currentPostId ? posts.find((p) => p.id === currentPostId)?.attachmentImage : undefined,
+      attachmentTitle: currentPostId ? posts.find((p) => p.id === currentPostId)?.attachmentTitle : undefined,
       isPublished: postIsPublished,
     };
 

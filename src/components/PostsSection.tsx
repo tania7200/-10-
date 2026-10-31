@@ -4,7 +4,7 @@
  */
 
 import React, { useState } from 'react';
-import { Newspaper, Search, PlusCircle, Pin, Eye, Calendar, User, Tag, ArrowRight, Edit3, Trash2 } from 'lucide-react';
+import { Newspaper, Search, PlusCircle, Pin, Eye, Calendar, User, Tag, ArrowRight, Edit3, Trash2, FileText } from 'lucide-react';
 import { Post, PostCategory, ThemeSettings } from '../types';
 
 interface PostsSectionProps {
@@ -158,6 +158,11 @@ export const PostsSection: React.FC<PostsSectionProps> = ({
                             <Pin className="w-2.5 h-2.5" /> 필독
                           </span>
                         )}
+                        {post.attachmentImage && (
+                          <span className="flex items-center gap-1 text-[10px] font-bold px-2 py-0.5 rounded bg-black/80 backdrop-blur-md border border-orange-500/50 text-orange-400">
+                            <FileText className="w-2.5 h-2.5" /> 게시표 첨부
+                          </span>
+                        )}
                       </div>
                     </div>
                   )}
@@ -177,6 +182,11 @@ export const PostsSection: React.FC<PostsSectionProps> = ({
                             <Pin className="w-2.5 h-2.5" /> 필독
                           </span>
                         )}
+                        {post.attachmentImage && (
+                          <span className="flex items-center gap-1 text-[10px] font-bold px-2 py-0.5 rounded bg-black/80 backdrop-blur-md border border-orange-500/50 text-orange-400">
+                            <FileText className="w-2.5 h-2.5" /> 게시표 첨부
+                          </span>
+                        )}
                       </div>
                     )}
 
@@ -189,10 +199,30 @@ export const PostsSection: React.FC<PostsSectionProps> = ({
 
                     <p 
                       onClick={() => onOpenPostDetail(post)}
-                      className="text-xs text-zinc-400 leading-relaxed line-clamp-2 mb-4 cursor-pointer"
+                      className="text-xs text-zinc-400 leading-relaxed line-clamp-2 mb-3 cursor-pointer"
                     >
                       {post.summary}
                     </p>
+
+                    {/* Attachment Clickable Trigger */}
+                    {post.attachmentImage && (
+                      <div 
+                        onClick={() => onOpenPostDetail(post)}
+                        className="mb-4 p-2.5 rounded-xl bg-[#181827] hover:bg-[#202035] border border-orange-500/30 flex items-center justify-between cursor-pointer transition-all group/att"
+                      >
+                        <div className="flex items-center gap-2 overflow-hidden">
+                          <span className="p-1 rounded-lg bg-orange-500/20 text-orange-400 shrink-0">
+                            <FileText className="w-3.5 h-3.5" />
+                          </span>
+                          <span className="text-[11px] font-semibold text-zinc-300 group-hover/att:text-white truncate">
+                            {post.attachmentTitle || '교습비등 게시표 원본 첨부'}
+                          </span>
+                        </div>
+                        <span className="text-[10px] text-orange-400 font-bold shrink-0 flex items-center gap-0.5">
+                          클릭 열람 <ArrowRight className="w-2.5 h-2.5" />
+                        </span>
+                      </div>
+                    )}
 
                     {/* Tags */}
                     {post.tags.length > 0 && (
