@@ -87,7 +87,7 @@ export const initialPosts: Post[] = [
     views: 2890,
     isPinned: true,
     tags: ['합격수기', '서울과고', '외대부고', '영재고합격', '개별맞춤'],
-    imageUrl: 'https://images.unsplash.com/photo-1523240795612-9a054b0db644?auto=format&fit=crop&w=1200&q=80',
+    imageUrl: '/assets/images/korean_students_uniforms_1793451652162.jpg',
     isPublished: true,
   },
   {
