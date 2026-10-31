@@ -88,7 +88,7 @@ export const Navbar: React.FC<NavbarProps> = ({
                   className="hidden md:inline-block px-1.5 py-0.5 text-[10px] font-bold rounded uppercase tracking-wider text-black"
                   style={{ backgroundColor: theme.primaryColor }}
                 >
-                  대치 10관
+                  도곡
                 </span>
               </div>
               <span className="text-[11px] text-zinc-400 font-medium truncate max-w-[220px] sm:max-w-xs">
