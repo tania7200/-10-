@@ -1,0 +1,60 @@
+@import "tailwindcss";
+
+@layer base {
+  :root {
+    --primary-orange: #ff6b00;
+    --primary-orange-hover: #ff8533;
+    --primary-glow: rgba(255, 107, 0, 0.25);
+    --bg-main: #07070a;
+    --bg-card: #111116;
+    --bg-card-hover: #171720;
+    --border-subtle: #242430;
+  }
+
+  body {
+    background-color: var(--bg-main);
+    color: #f3f4f6;
+    font-family: "Pretendard Variable", Pretendard, -apple-system, BlinkMacSystemFont, system-ui, Roboto, "Helvetica Neue", "Segoe UI", "Apple SD Gothic Neo", "Noto Sans KR", "Malgun Gothic", sans-serif;
+    overflow-x: hidden;
+  }
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+::-webkit-scrollbar-track {
+  background: #09090d;
+}
+::-webkit-scrollbar-thumb {
+  background: #282835;
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #ff6b00;
+}
+
+/* Luxury dark backdrop mesh */
+.dark-grid-bg {
+  background-size: 40px 40px;
+  background-image: 
+    linear-gradient(to right, rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+}
+
+.math-glow-radial {
+  background: radial-gradient(circle at 50% 30%, rgba(255, 107, 0, 0.15) 0%, rgba(10, 10, 15, 0) 70%);
+}
+
+.orange-gradient-text {
+  background: linear-gradient(135deg, #ffffff 10%, #ffaa5b 60%, #ff6b00 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.gold-orange-gradient-text {
+  background: linear-gradient(135deg, #fff7ed 0%, #fed7aa 40%, #ff6b00 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}

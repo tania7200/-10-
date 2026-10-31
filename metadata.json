@@ -1,0 +1,8 @@
+{
+  "name": "그레이드원 대치10관 수학학원",
+  "description": "초중고 내신대비 및 개별맞춤, 명문고·특목고 합격 및 국제학교(IB/AP/SAT) 전문 대치동 수학학원. 서울 강남구 도곡로 184 4층. 상담전화 02-573-3133",
+  "requestFramePermissions": [],
+  "majorCapabilities": [
+    "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"
+  ]
+}
