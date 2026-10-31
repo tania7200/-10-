@@ -26,7 +26,7 @@ export const initialThemeSettings: ThemeSettings = {
   address: '서울특별시 강남구 도곡로 184 (도곡동 544) 4층',
   detailAddress: '강남세브란스 사거리 인근, 도곡1동 주민센터 맞은편 4층 (기계식 주차 가능)',
   businessHours: '평일 14:00 - 22:00 | 주말 10:00 - 21:00 (사전예약 상담제)',
-  notificationBanner: '📢 2026학년도 1학기 내신대비반 & 국제학교(IB/AP) 봄학기 소수정예 6인 마감 임박',
+  notificationBanner: '📢 2026 2학기 내신대비반 & 11월 예비고1 고등과정특강반',
   showNotificationBanner: true,
 };
 

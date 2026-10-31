@@ -8,7 +8,7 @@ import { initialPosts, initialThemeSettings, initialSeoSettings, initialBookings
 
 const STORAGE_KEYS = {
   POSTS: 'gradeone_posts_v4',
-  THEME: 'gradeone_theme_v2',
+  THEME: 'gradeone_theme_v3',
   SEO: 'gradeone_seo_v2',
   BOOKINGS: 'gradeone_bookings_v2',
 };
@@ -42,8 +42,14 @@ export const saveStoredPosts = (posts: Post[]): void => {
 
 export const loadStoredTheme = (): ThemeSettings => {
   try {
-    const data = localStorage.getItem(STORAGE_KEYS.THEME);
-    if (data) return JSON.parse(data);
+    const data = localStorage.getItem(STORAGE_KEYS.THEME) || localStorage.getItem('gradeone_theme_v2');
+    if (data) {
+      const parsed = JSON.parse(data);
+      if (parsed.notificationBanner && (parsed.notificationBanner.includes('1학기 내신대비반') || parsed.notificationBanner.includes('봄학기'))) {
+        parsed.notificationBanner = initialThemeSettings.notificationBanner;
+      }
+      return { ...initialThemeSettings, ...parsed };
+    }
   } catch (e) {
     console.error('Failed to load theme from storage', e);
   }
